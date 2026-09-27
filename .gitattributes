@@ -1,0 +1,8 @@
+# Store and check out text with LF so the organizers' files stay byte-identical
+# and scripts run unchanged on the Linux judging machine.
+* text=auto eol=lf
+
+*.pt   binary
+*.png  binary
+*.jpg  binary
+*.pkl  binary

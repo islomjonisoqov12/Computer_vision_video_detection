@@ -1,0 +1,22 @@
+# Python / environment
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Videos: sample footage is multi-GB and provided by the organizers
+samples/
+*.mp4
+*.MP4
+
+# Local dev artifacts (regenerate with tools/cache_tracks.py and run_submission.py)
+cache/
+/predictions*.json
+
+# Model weights ARE committed: the official run is offline (weights/yolo11n.pt)

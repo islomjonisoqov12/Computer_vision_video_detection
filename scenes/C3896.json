@@ -1,0 +1,26 @@
+{
+  "name": "C3896 main road / side road intersection",
+  "size": [3840, 2160],
+  "reference": "C3896_ref.png",
+  "signals": {
+    "main": {
+      "heads": [
+        {"roi": [2260, 680, 2390, 850], "note": "main-road vehicle head on the median, faces camera"},
+        {"roi": [500, 920, 640, 1070], "note": "side-road crosswalk pedestrian head, same phase as main green"}
+      ]
+    }
+  },
+  "crosswalks": [
+    {"name": "main_road", "walk_when": {"main": "red"},
+     "polygon": [[680, 1200], [2350, 1030], [3400, 950], [3450, 1005], [2380, 1100], [790, 1300]]},
+    {"name": "side_road", "walk_when": {"main": "green"},
+     "polygon": [[380, 1480], [700, 1420], [1820, 2160], [1120, 2160]]}
+  ],
+  "stop_lines": [
+    {"name": "main_down_right", "signal": "main", "direction": [0.9, 0.42],
+     "line": [[600, 1040], [1880, 910]], "note": "painted line before the main crosswalk"},
+    {"name": "main_up_left", "signal": null, "direction": [-0.9, -0.42],
+     "line": [[2640, 1140], [3520, 1050]],
+     "note": "before the right half of the main crosswalk; its signal head is not visible (79/162 crossings happen during main red)"}
+  ]
+}

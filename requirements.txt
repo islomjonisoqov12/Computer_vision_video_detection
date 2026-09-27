@@ -1,0 +1,7 @@
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.0.0
+supervision>=0.16.0,<0.31.0
+opencv-python>=4.6.0
+numpy>=1.22.0
+scikit-learn>=1.0.0
