@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIUT Hackathon 2026 | Project Xorazmiy - Traffic Intelligence</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131d31;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --border: #1e293b;
+            --success: #22c55e;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+        }
+        .badge-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .sub-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: 8px;
+        }
+        .sub-card h3 {
+            margin-top: 0;
+            color: #e2e8f0;
+            font-size: 1rem;
+        }
+        ul {
+            padding-left: 20px;
+            color: var(--text-muted);
+            margin: 8px 0;
+        }
+        li {
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        li strong {
+            color: var(--text-color);
+        }
+        pre {
+            background: #070a12;
+            color: #38bdf8;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WIUT Hackathon 2026 Submission</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Team Xorazmiy — Advanced Roadside Traffic Violation & Event Detection Pipeline</p>
+            <div class="badge-group">
+                <span class="badge">Team: Xorazmiy</span>
+                <span class="badge">Part A: Event Detection</span>
+                <span class="badge">YOLO + ByteTrack + Rule Engine</span>
+            </div>
+        </header>
+
+        <!-- 1. EXPLORATORY DATA ANALYSIS & OBSERVATIONS -->
+        <div class="card">
+            <h2>1. Exploratory Data Analysis & C3896 Sample Observations</h2>
+            <p>Our manual analysis and walkthrough of the sample roadside CCTV footage (`C3896.MP4`) revealed key safety anomalies and traffic patterns:</p>
+            <ul>
+                <li><strong>00:01</strong> — A Cobalt vehicle makes an unsafe turning maneuver.</li>
+                <li><strong>01:20</strong> — A car blocks the pedestrian path.</li>
+                <li><strong>3:02</strong> — A car passes through without yielding to waiting pedestrians.</li>
+                <li><strong>3:06</strong> — Another car executes a turning maneuver near an active traffic light.</li>
+                <li><strong>3:55</strong> — Onset of localized traffic congestion.</li>
+                <li><strong>5:13</strong> — A Cobalt vehicle blocks the path of pedestrians.</li>
+            </ul>
+        </div>
+
+        <!-- 2. TECHNICAL ARCHITECTURE & PIPELINE -->
+        <div class="card">
+            <h2>2. Technical Architecture & Execution Pipeline</h2>
+            <div class="grid-2">
+                <div class="sub-card">
+                    <h3>Perception & Tracking Logic</h3>
+                    <ul>
+                        <li><strong>YOLO Detection:</strong> Applied across frames to detect and classify each object in the video stream.</li>
+                        <li><strong>Adaptive Frame Sampling:</strong> Programmed to process every second or third frame to optimize processing speed and efficiency.</li>
+                        <li><strong>ByteTrack Tracking:</strong> Tracks each object separately across frames to build clean, distinct trajectory histories.</li>
+                    </ul>
+                </div>
+                <div class="sub-card">
+                    <h3>Rule Engine & Performance</h3>
+                    <ul>
+                        <li><strong>Algorithm Evaluation:</strong> Once tracked, custom spatial and temporal rules evaluate object movements to flag specific violations.</li>
+                        <li><strong>Hardware Profile:</strong> On local development hardware processing a 5 GB video sample, the complete detection and analysis run takes approximately 12 minutes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. EXECUTION COMMAND -->
+        <div class="card">
+            <h2>3. Project Execution Command</h2>
+            <p>The solution integrates seamlessly with the official evaluation harness and is run via the command line:</p>
+            <pre>python run_submission.py --videos ./samples --out predictions_samples.json</pre>
+        </div>
+
+        <!-- 4. OUTPUT SCHEMA -->
+        <div class="card">
+            <h2>4. Output Schema (`predictions_samples.json`)</h2>
+            <p>The processing pipeline outputs structured event timestamp intervals compliant with the hackathon submission format:</p>
+            <pre>{
+  "team": "Xorazmiy",
+  "videos": {
+    "C3896.MP4": {
+      "events": [
+        [0.01, 5.00, "unsafe_turn"],
+        [74.0, 80.0, "failure_to_yield"],
+        [235.0, 275.0, "congestion"]
+      ]
+    }
+  }
+}</pre>
+        </div>
+    </div>
+</body>
+</html>
